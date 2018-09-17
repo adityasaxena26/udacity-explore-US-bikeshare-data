@@ -4,7 +4,9 @@ import numpy as np
 
 CITY_DATA = { 'chicago': 'chicago.csv',
               'new york city': 'new_york_city.csv',
-              'washington': 'washington.csv' }
+              'washington': 'washington.csv' }              
+months = ['january', 'february', 'march', 'april', 'may', 'june']
+days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']
 
 def get_filters():
     """
@@ -18,7 +20,7 @@ def get_filters():
 
     print('Hello! Let\'s explore some US bikeshare data!')
 
-    # get user input for city (chicago, new york city, washington). HINT: Use a while loop to handle invalid inputs
+    # get user input for city (chicago, new york city, washington)
     city = ' '
     while(city.lower() not in CITY_DATA):
         city = input('\nEnter name of the city to analyze: ').lower()
@@ -30,7 +32,6 @@ def get_filters():
     # get user input for month (all, january, february, ... , june)
     month = ' '
     if month !=  'all':
-        months = ['january', 'february', 'march', 'april', 'may', 'june']
         while(month.lower() not in months):
             month = input('\nEnter name of month to analyze: ').lower()
             if month not in months:
@@ -40,8 +41,7 @@ def get_filters():
 
     # get user input for day of week (all, monday, tuesday, ... sunday)
     day = ' '
-    if day !=  'all':
-        days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']
+    if day !=  'all'
         while(day.lower() not in days):
             day = input('\nEnter the day of week: ').lower()
             if day not in days:
