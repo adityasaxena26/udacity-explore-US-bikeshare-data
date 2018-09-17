@@ -15,9 +15,9 @@ def get_filters():
         (str) month - name of the month to filter by, or "all" to apply no month filter
         (str) day - name of the day of week to filter by, or "all" to apply no day filter
     """
-    
+
     print('Hello! Let\'s explore some US bikeshare data!')
-    
+
     # get user input for city (chicago, new york city, washington). HINT: Use a while loop to handle invalid inputs
     city = ' '
     while(city.lower() not in CITY_DATA):
@@ -26,7 +26,7 @@ def get_filters():
             print('\nInvalid Input! You have not entered a correct city name. Try again..')
         else:
             break
-            
+
     # get user input for month (all, january, february, ... , june)
     month = ' '
     if month !=  'all':
@@ -46,10 +46,9 @@ def get_filters():
             day = input('\nEnter the day of week: ').lower()
             if day not in days:
                 print('\nInvalid day of week! You have not entered a correct day of the week. Try again..')
-            else: 
+            else:
                 break
-    
-
+                
     print('-'*40)
     return city, month, day
 
@@ -67,7 +66,7 @@ def load_data(city, month, day):
     """
     df = pd.read_csv(CITY_DATA[city])
     df['Start Time'] = pd.to_datetime(df['Start Time'])
-    
+
     df['month'] = df['Start Time'].dt.month
     df['hour'] = df['Start Time'].dt.hour
     df['week_day'] = df['Start Time'].dt.weekday
@@ -105,11 +104,11 @@ def station_stats(df):
 
     # display most commonly used end station
     print('The most commonly used end station: ', df['End Station'].mode()[0])
-    
+
     # TO DO: display most frequent combination of start station and end station trip
     num_trips = df.groupby(['Start Station', 'End Station']).size()
     print('The most frequent combination of start station and end station trip:\n', num_trips[num_trips == num_trips.max()])
-    
+
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
 
@@ -125,7 +124,7 @@ def trip_duration_stats(df):
 
     # display mean travel time
     print("\nMean travel time:", df['Trip Duration'].mean())
-    
+
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
 
@@ -160,6 +159,14 @@ def main():
         station_stats(df)
         trip_duration_stats(df)
         user_stats(df)
+        while True:
+            show_data = input('\nDo you want to explore the raw data? Enter yes or no.\n')
+            if show_data.lower() != 'yes':
+                break
+            else:
+                print('\nAfter applying filters, the dataset for {} contains {} rows.'.format(city,df.shape[0]))
+                n = int(input('\nEnter the number of rows of data you would like to display: '))
+                print('The raw data is displayed below as requested.\n', df.head(n))
 
         restart = input('\nWould you like to restart? Enter yes or no.\n')
         if restart.lower() != 'yes':
