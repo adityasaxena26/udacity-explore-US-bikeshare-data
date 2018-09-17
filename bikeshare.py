@@ -4,7 +4,7 @@ import numpy as np
 
 CITY_DATA = { 'chicago': 'chicago.csv',
               'new york city': 'new_york_city.csv',
-              'washington': 'washington.csv' }              
+              'washington': 'washington.csv' }
 months = ['january', 'february', 'march', 'april', 'may', 'june']
 days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']
 
@@ -70,6 +70,15 @@ def load_data(city, month, day):
     df['month'] = df['Start Time'].dt.month
     df['hour'] = df['Start Time'].dt.hour
     df['week_day'] = df['Start Time'].dt.weekday
+
+    # filter by month to create the new dataframe
+    if month != 'all':
+        month = months.index(month) + 1
+        df = df[df['month']] == month
+
+    # filter by day of week to create the new dataframe
+    if day != 'all':
+        df = df[df['day_of_week'] == day.title()]
 
     return df
 
