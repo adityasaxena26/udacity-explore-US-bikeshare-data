@@ -48,7 +48,7 @@ def get_filters():
                 print('\nInvalid day of week! You have not entered a correct day of the week. Try again..')
             else:
                 break
-                
+
     print('-'*40)
     return city, month, day
 
@@ -138,13 +138,16 @@ def user_stats(df):
     # Display counts of user types
     print('Counts of user types:\n', df['User Type'].value_counts())
 
-    # Display counts of gender
-    print('\nCounts of gender:\n', df['Gender'].value_counts())
-
     # Display earliest, most recent, and most common year of birth
-    print('\nEarliest year of birth: ', df['Birth Year'].min())
-    print('\nMost common year of birth: ', df['Birth Year'].mode()[0])
-    print('\nMost recent year of birth: ', df['Birth Year'].max())
+    if city == 'washington':
+        print('\nThe \'Gender\' and \'Birth Year\' information is not available for Washington.')
+    else:
+        # Display counts of gender
+        print('\nCounts of gender:\n', df['Gender'].value_counts())
+        # Display earliest, most recent, and most common year of birth
+        print('\nEarliest year of birth: ', int(df['Birth Year'].min()))
+        print('\nMost common year of birth: ', int(df['Birth Year'].mode()[0]))
+        print('\nMost recent year of birth: ', int(df['Birth Year'].max()))
 
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
