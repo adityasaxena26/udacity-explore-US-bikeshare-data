@@ -25,29 +25,31 @@ def get_filters():
     while(city.lower() not in CITY_DATA):
         city = input('\nEnter name of the city to analyze: ').lower()
         if city not in CITY_DATA:
-            print('\nInvalid Input! You have not entered a correct city name. Try again..')
+            print('\nInvalid Input! You have entered an incorrect city name. Please Try again..')
         else:
             break
 
-    # get user input for month (all, january, february, ... , june)
+    # get user input for month (january, february, ... , june or all)
     month = ' '
-    if month !=  'all':
-        while(month.lower() not in months):
-            month = input('\nEnter name of month to analyze: ').lower()
-            if month not in months:
-                print('\nInvalid month! You have not entered a correct month name. Try again..')
-            else:
-                break
+    while(month.lower() not in months):
+        month = input('\nEnter name of the month to filter by(i.e., january, february,.., june) or "all" to apply no month filter: ').lower()
+        if month == 'all':
+            break
+        elif month not in months:
+            print('\nInvalid month! You have entered an incorrect month name. Please Try again..')
+        else:
+            break
 
-    # get user input for day of week (all, monday, tuesday, ... sunday)
+    # get user input for day of week (monday, tuesday, ... sunday or all)
     day = ' '
-    if day !=  'all'
-        while(day.lower() not in days):
-            day = input('\nEnter the day of week: ').lower()
-            if day not in days:
-                print('\nInvalid day of week! You have not entered a correct day of the week. Try again..')
-            else:
-                break
+    while(day.lower() not in days):
+        day = input('\nEnter name of the day of week to filter by(i.e., monday, tuesday,.., sunday) or "all" to apply no day filter: ').lower()
+        if day == 'all':
+            break
+        elif day not in days:
+            print('\nInvalid day of week! You have not entered a correct name of the day of a week. Please try again.. ')
+        else:
+            break
 
     print('-'*40)
     return city, month, day
